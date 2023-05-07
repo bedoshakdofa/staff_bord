@@ -5,14 +5,11 @@ from django.contrib.auth.decorators import login_required
 from .import models
 from django.contrib.auth.models import User
 
-def home (request):
-    return render(request,'home.html')
-
 def search_detial(request):
     if request.method=="POST":
         print("test1")
         q=request.POST.get('q')
-        data=User.objects.filter(first_name__icontains=q)
+        data=User.objects.get(first_name__icontains=q)
     context={"data":data}
 
     return render (request,'detial_view.html',context)

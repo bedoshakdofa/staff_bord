@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 {% extends 'nav.html' %}
+{% load static %}
 {% block content %}
 <html lang="en">
 <head>
@@ -8,12 +9,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
-<body>
+<body style='background-image:url({% static 'img/Savin-NY-Website-Background-Web1.jpg' %})'>
     {% if request.user.is_authenticated %}
         <form method="POST">
             {% csrf_token %}
-            <p>are your sure to logout</p>
-             <button type="submit"> yes, logout</button>
+            <div style='font-size:20px; text-align:center; margin-top: 200px;'>
+                <p>are your sure to logout?</p>
+                <button type="submit"> yes, logout</button>
+            </div>
              
         </form>
    {% endif %}
