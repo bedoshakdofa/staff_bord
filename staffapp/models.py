@@ -16,13 +16,11 @@ class postion(models.Model):
 
 class Profile(models.Model):
     user=models.OneToOneField(User,on_delete=models.CASCADE)
-    phone_number=models.CharField(max_length=11,null=True)
-    img=models.ImageField(upload_to='profile',null=True)
-    email=models.EmailField(null=True)
-    website=models.URLField(null=True)
-    # notional_id=models.CharField(max_length=14)
-    department=models.ForeignKey(Department,on_delete=models.CASCADE,null=True)
-    postion=models.ForeignKey(postion,on_delete=models.CASCADE,null=True)
+    phone_number=models.CharField(max_length=11,null=True,blank=True)
+    email=models.EmailField(null=True,blank=True,unique=True)
+    website=models.URLField(null=True,blank=True)
+    department=models.ForeignKey(Department,on_delete=models.CASCADE,null=True,blank=True)
+    postion=models.ForeignKey(postion,on_delete=models.CASCADE,null=True,blank=True)
 
     @receiver(post_save, sender=User)
     def create_user_profile(sender, instance, created, **kwargs):
@@ -30,4 +28,4 @@ class Profile(models.Model):
             Profile.objects.create(user=instance)
 
     def __str__(self):
-        return self.user
+        return str(self.user)

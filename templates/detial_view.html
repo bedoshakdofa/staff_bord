@@ -1,5 +1,68 @@
-{% extends 'nav.html' %}
+{% include 'home.html' %}
 
-{% block content %}
-    {{data.email}}
-{% endblock content %}
+<!DOCTYPE html>
+<h1>Result</h1>
+
+<html>
+<head>
+  <style>
+	table {
+		border:solid;
+		width: 100%;
+	  }
+	  th, td {
+		padding: 8px;
+		text-align: left;
+		border-bottom: 1px solid #ddd;
+    text-align:center
+	  }
+	  th {
+		background-color: #f2f2f2;
+    text-align:center
+	  }
+	  tbody tr:hover {
+		background-color: #394148;
+	  }
+	  td {
+      color:white;
+      font-size:20px;
+    }
+	  #searchInput {
+		width: 100%;
+		padding: 8px;
+		margin-bottom: 10px;
+	  }
+    #link {
+      color:white;
+      font-size:20px;
+    }
+  </style>
+</head>
+<body>
+  <table id="resultsTable">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>acdmic postion</th>
+        <th>Email</th>
+        <th>Phone</th>
+        <th>detial</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for object in object %}
+        <tr>
+          <td>{{object.first_name}} {{object.last_name}}</td>
+            <td>{{object.profile.postion}}</td>
+            <td>{{object.profile.email}}</td>
+            <td>{{object.profile.phone_number}}</td>
+          {% if object %}
+            <td><a id="link"href="/profile/{{object.id}}/">show</a></td>
+          {% endif %}
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+</body>
+</html>
