@@ -25,6 +25,7 @@ def login_view(request):
         user=authenticate(request,username=username,password=password)
         if user is not None:
             login(request,user)
+            messages.success(request,"logged in")
             return redirect("home")
         else:
             context={"error":"invaild username or password"}
@@ -41,6 +42,7 @@ def sigup_views(request):
         form=registeration(request.POST)
         if form.is_valid():
             form.save()
+            messages.success(request,"signup successfully")
             username=form.cleaned_data['username']
             password=form.cleaned_data['password1']
             user=authenticate(username=username,password=password)
@@ -51,9 +53,9 @@ def sigup_views(request):
     return render(request,'signup.html',{"form":form})
 
 
-def profile_view2(request,id):
+def profile_view_user(request,id):
     profile=models.Profile.objects.get(user=id)
-    return render (request,'profile.html',{"profile":profile})
+    return render (request,'profile_user.html',{"profile":profile})
 
 @login_required(login_url='login')
 def profile_view(request):
@@ -72,8 +74,8 @@ def profile_edit(request):
             myprofile = profileform.save(commit=False)
             myprofile.user = request.user
             myprofile.save()
+            messages.success(request,"profile updated")
             return redirect('profile')
-
     else :
         userform = Userform(instance=request.user)
         profileform = Profileform(instance=profile)
@@ -81,3 +83,12 @@ def profile_edit(request):
     context={'userform':userform , 'profileform':profileform,"profile":profile}
     return render(request,'profile_edit.html',context=context)
 
+def delete_profile(request):
+    if request.method=="GET":
+        profile=models.Profile.objects.get(user=request.user)
+        user=User.objects.get(username=request.user)
+        profile.delete()
+        user.delete()
+        messages.success(request,"account deleted succssfully")
+        return redirect('home')
+    return render (request,"profile.html")

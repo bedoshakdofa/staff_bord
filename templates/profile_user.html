@@ -1,4 +1,6 @@
+
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
     {% load static %}
@@ -7,10 +9,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href={% static 'css/profile_edit.css' %}>
-    <!-- CSS -->
-    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/>
-<!-- Default theme -->
-    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css"/>
     <title>profile</title>
 </head>
 <body>
@@ -35,9 +33,8 @@
                         <div class="col-md-12"><label class="labels">Department:</label><br> {{profile.department}}</div>
                         <div class="col-md-12"><label class="labels">Acdmic postion:</label> <br> {{profile.postion}}</div>
                     </div>
-                        <div class="mt-5 text-left" ><a href="{% url 'profile_edit' %}"><button class="btn btn-primary profile-button" type="button">Edit</button></a>
-                            <a href="{% url 'home' %}"><button class="btn btn-primary profile-button" type="button">home</button></a>
-                            <a href="{% url 'delete' %}"><button class="btn btn-primary profile-button" type="button">delete</button></a>
+                        <div class="mt-5 text-left" >
+                            <a href="{% url 'home' %}"><button class="btn btn-primary profile-button"type="button">home</button></a>
                         </div>
                 </div>
             </div>
@@ -47,12 +44,5 @@
     </div>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
-    <script>
-        {% for msg in messages %}
-            alertify.set('notifier','position', 'top-center');
-            alertify.success('{{msg}}');
-        {% endfor %}
-    </script>
 </body>
 </html>
